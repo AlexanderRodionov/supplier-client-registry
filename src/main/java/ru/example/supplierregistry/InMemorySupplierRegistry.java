@@ -14,10 +14,10 @@ public class InMemorySupplierRegistry implements SupplierRegistry {
     public InMemorySupplierRegistry(List<Supplier> initial) { replaceAll(initial); }
 
     @Override public void replaceAll(List<Supplier> values) {
-        Objects.requireNonNull(values, \"suppliers\");
-        Map<String, Supplier> replacement = values.stream().map(s -> Objects.requireNonNull(s, \"supplier\"))
+        Objects.requireNonNull(values, "suppliers");
+        Map<String, Supplier> replacement = values.stream().map(s -> Objects.requireNonNull(s, "supplier"))
                 .collect(Collectors.toUnmodifiableMap(Supplier::id, Function.identity(), (a, b) -> {
-                    throw new IllegalArgumentException(\"Duplicate supplier id: \" + a.id());
+                    throw new IllegalArgumentException("Duplicate supplier id: " + a.id());
                 }));
         suppliers.set(replacement);
     }
